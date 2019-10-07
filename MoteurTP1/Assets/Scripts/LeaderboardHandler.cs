@@ -9,9 +9,22 @@ public class LeaderboardHandler : MonoBehaviour
 {
     public Transform scrollview;
     public GameObject prefab;
-
     // Start is called before the first frame updatess
     void OnEnable()
+    {
+        ShowScores();
+    }
+
+    public void OnAddBtnClick()
+    {
+        SQLiteConnection connection = new SQLiteConnection(Application.streamingAssetsPath + "/db.db", SQLiteOpenFlags.ReadWrite);
+
+        connection.Insert(new Scores() { name = "test", score = "0" });
+
+        ShowScores();
+    }
+
+    void ShowScores()
     {
         foreach (Transform child in scrollview)
         {
@@ -22,7 +35,7 @@ public class LeaderboardHandler : MonoBehaviour
         var scores = connection.Query<Scores>("SELECT * FROM Scores ORDER BY score DESC");
 
         Scores[] scoresArr = scores.ToArray();
-        foreach(Scores score in scoresArr)
+        foreach (Scores score in scoresArr)
         {
             //Load la base de données et boucler les inscrutions pour chaque score.
             GameObject scoreLine = Instantiate(prefab, scrollview);
@@ -30,11 +43,10 @@ public class LeaderboardHandler : MonoBehaviour
             Transform nameLabel = scoreLine.transform.Find("NameLabel");
             TMP_Text nameLabelTextField = nameLabel.GetComponent<TMP_Text>();
             nameLabelTextField.SetText(score.name);
-            
+
             Transform scoreLabel = scoreLine.transform.Find("ScoreLabel");
             TMP_Text scoreLabelTextField = scoreLabel.GetComponent<TMP_Text>();
             scoreLabelTextField.text = score.score.ToString();
         }
-
     }
 }

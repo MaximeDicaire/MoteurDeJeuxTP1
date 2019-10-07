@@ -1,5 +1,6 @@
 ﻿using SQLite4Unity3d;
 
+[Table("Scores")]
 public class Scores
 {
     [PrimaryKey, AutoIncrement]
