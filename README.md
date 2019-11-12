@@ -1,4 +1,4 @@
-# MoteurDeJeuxTP1
+# MoteurDeJeux
 # Maxime Dicaire
 # Maxime Tremblay
 # Arianne Tremblay

@@ -11,6 +11,7 @@ public class CollectScript : MonoBehaviour
     public int cpt = 0;
     AudioSource audioCollectible;
     public AudioClip collectible;
+
     // Start is called before the first frame update
     void Start()
     {
