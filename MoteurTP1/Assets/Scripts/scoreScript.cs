@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class scoreScript : MonoBehaviour
 {
@@ -18,14 +19,21 @@ public class scoreScript : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + score;
-        Debug.Log("Hello: " + score);
 
+        if (score >= 6)
+        {
+            LoadLevel();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
 
         score += 1;
-        Debug.Log("BYE: " + score);
+    }
+
+    void LoadLevel()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
