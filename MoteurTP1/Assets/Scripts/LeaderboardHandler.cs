@@ -35,6 +35,14 @@ public class LeaderboardHandler : MonoBehaviour
         var scores = connection.Query<Scores>("SELECT * FROM Scores ORDER BY score DESC");
 
         Scores[] scoresArr = scores.ToArray();
+        Scores scorePlusGrand = null;
+        foreach (Scores score in scoresArr)
+        {
+            //Trouver le plus grand score
+
+            Debug.Log("test " + score);
+        }
+
         foreach (Scores score in scoresArr)
         {
             //Load la base de données et boucler les inscrutions pour chaque score.
