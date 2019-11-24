@@ -9,6 +9,7 @@ public class SoundMarche : MonoBehaviour
 {
     AudioSource audioMarche;        //son quand marche
     public AudioClip marche;
+    bool isMoving = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,15 +21,15 @@ public class SoundMarche : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Si on marche, on fait tourner le son
-        if (Input.GetKeyDown("up") || Input.GetKeyDown("down") || Input.GetKeyDown("right") || Input.GetKeyDown("left"))
+        if (!isMoving && (Input.GetKeyDown("up") || Input.GetKeyDown("down") || Input.GetKeyDown("right") || Input.GetKeyDown("left")))
         {
+            isMoving = true;
             audioMarche.Play();
             audioMarche.loop = true;
         }
-        //Si on marches pu on arrete le son
-        if (Input.GetKeyUp("up") || Input.GetKeyUp("down") || Input.GetKeyUp("right") || Input.GetKeyUp("left"))
+        else if (!Input.GetKey("up") && !Input.GetKey("down") && !Input.GetKey("right") && !Input.GetKey("left"))
         {
+            isMoving = false;
             audioMarche.Stop();
             audioMarche.loop = false;
         }

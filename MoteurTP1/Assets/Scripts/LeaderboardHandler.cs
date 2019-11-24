@@ -35,13 +35,7 @@ public class LeaderboardHandler : MonoBehaviour
         var scores = connection.Query<Scores>("SELECT * FROM Scores ORDER BY score DESC");
 
         Scores[] scoresArr = scores.ToArray();
-        Scores scorePlusGrand = null;
-        foreach (Scores score in scoresArr)
-        {
-            //Trouver le plus grand score
-
-            Debug.Log("test " + score);
-        }
+        bool first = true;
 
         foreach (Scores score in scoresArr)
         {
@@ -55,6 +49,13 @@ public class LeaderboardHandler : MonoBehaviour
             Transform scoreLabel = scoreLine.transform.Find("ScoreLabel");
             TMP_Text scoreLabelTextField = scoreLabel.GetComponent<TMP_Text>();
             scoreLabelTextField.text = score.score.ToString();
+
+            if (first)
+            {
+                nameLabelTextField.color = Color.red;
+                scoreLabelTextField.color = Color.red;
+                first = false;
+            }
         }
     }
 }
